@@ -1,0 +1,21 @@
+---
+import type { Lang } from '../lib/i18n';
+import { localizedHref } from '../lib/paths';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = lang === 'zh'
+  ? { about: '关于本站', method: '本站记录公开报道的争议事件,区分争议与已证实,非定罪材料。' }
+  : { about: 'About', method: 'This site documents publicly reported disputes, distinguishing allegations from findings. Not a conviction record.' };
+---
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="muted">{t.method}</p>
+    <a href={localizedHref(lang === 'zh' ? '/about' : '/en/about')}>{t.about}</a>
+  </div>
+</footer>
+<style>
+.site-footer { background: var(--surface-dark); color: var(--on-dark-soft); padding: var(--space-xl) var(--space-xl); margin-top: var(--space-section); }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; gap: var(--space-lg); flex-wrap: wrap; }
+.muted { color: var(--on-dark-soft); max-width: 560px; line-height: 1.55; }
+.footer-inner a { color: var(--on-dark); }
+</style>

@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import Timeline from '../../components/Timeline.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import { getAllEvents } from '../../content';
+const events = await getAllEvents();
+---
+<Base title="Fairness Archive" lang="en">
+  <section style="max-width:1200px;margin:0 auto;padding:48px 32px 96px;">
+    <h1>Fairness Archive</h1>
+    <FilterBar events={events} lang="en" />
+    <Timeline events={events} lang="en" />
+  </section>
+</Base>

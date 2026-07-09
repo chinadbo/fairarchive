@@ -1,0 +1,15 @@
+---
+import EventCard from './EventCard.astro';
+import type { EventEntry } from '../content';
+import type { Lang } from '../lib/i18n';
+interface Props { events: EventEntry[]; lang: Lang; }
+const { events, lang } = Astro.props;
+---
+<div class="timeline">
+  {events.map((event) => <EventCard event={event} lang={lang} />)}
+  {events.length === 0 && <p class="empty">{lang === 'zh' ? '暂无匹配事件。' : 'No matching events.'}</p>}
+</div>
+<style>
+.timeline { max-width: 820px; margin: 0 auto; }
+.empty { color: var(--muted); text-align: center; padding: var(--space-xxl); }
+</style>

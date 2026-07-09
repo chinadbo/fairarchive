@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../lib/i18n';
+import { stripBase, localizedHref } from '../lib/paths';
+interface Props { current: Lang; }
+const { current } = Astro.props;
+// Operate on the site-relative path (base stripped) so zh↔en switching is
+// independent of the deployment sub-path, then re-prefix the base for the href.
+const path = stripBase(Astro.url.pathname);
+let target: string;
+if (current === 'zh') {
+  target = path === '/' ? '/en/' : `/en${path}`;
+} else {
+  target = path.replace(/^\/en(?=\/|$)/, '') || '/';
+}
+const href = localizedHref(target);
+---
+<nav class="lang-toggle" aria-label="语言切换">
+  {current === 'zh'
+    ? <span class="lang-link active" aria-current="true">中</span>
+    : <a href={href} class="lang-link">中</a>}
+  <span aria-hidden="true">/</span>
+  {current === 'en'
+    ? <span class="lang-link active" aria-current="true">EN</span>
+    : <a href={href} class="lang-link">EN</a>}
+</nav>
+<style>
+.lang-toggle { display: inline-flex; align-items: center; gap: var(--space-xs); font-size: 14px; }
+.lang-link { color: var(--muted); text-decoration: none; padding: var(--space-xxs) var(--space-xs); border-radius: var(--radius-sm); }
+.lang-link.active { color: var(--ink); background: var(--surface-card); }
+</style>

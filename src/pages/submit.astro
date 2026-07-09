@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { repo } from '../config';
+---
+<Base title="提交线索 · 公平档案" lang="zh">
+  <section style="max-width:720px;margin:0 auto;padding:48px 32px 96px;">
+    <h1>提交线索</h1>
+    <p>请填写以下信息。提交后将打开一个预填好的 GitHub Issue,经审核后入库。来源链接必填。</p>
+    <form id="submit-form">
+      <label>日期 <input name="date" type="date" required /></label>
+      <label>分类 <select name="category"><option>判罚争议</option><option>裁判执法</option><option>FIFA治理</option><option>种族歧视指控</option><option>其他</option></select></label>
+      <label>状态 <select name="status"><option>报道争议</option><option>已被质疑</option><option>官方裁定</option></select></label>
+      <label>标题(中) <input name="title_zh" required /></label>
+      <label>标题(英) <input name="title_en" /></label>
+      <label>摘要(中) <textarea name="summary_zh" required></textarea></label>
+      <label>来源链接(必填) <input name="source" type="url" required placeholder="https://…" /></label>
+      <button type="submit" class="btn-primary">提交 Issue</button>
+    </form>
+  </section>
+</Base>
+<script is:inline define:vars={{ repo }}>
+  const f = document.getElementById('submit-form');
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = new FormData(f);
+    const title = `[线索] ${d.get('title_zh') || d.get('title_en')}`;
+    const body = [
+      `日期: ${d.get('date')}`, `分类: ${d.get('category')}`, `状态: ${d.get('status')}`,
+      `标题(中): ${d.get('title_zh')}`, `标题(英): ${d.get('title_en')}`,
+      `摘要(中): ${d.get('summary_zh')}`, `来源: ${d.get('source')}`,
+      '', '--- 请审核来源,必要时补充当事方回应与后续裁定。', '',
+    ].join('\n');
+    window.open(`https://github.com/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`, '_blank');
+  });
+</script>
+<style>
+form { display: grid; gap: var(--space-md); }
+label { display: grid; gap: var(--space-xxs); font-size: 14px; color: var(--body-strong); }
+input, select, textarea { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--radius-md); padding: 10px 14px; font: inherit; color: var(--ink); min-height: 44px; }
+.btn-primary { background: var(--primary); color: var(--on-primary); border: none; padding: 10px 20px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; min-height: 44px; cursor: pointer; }
+.btn-primary:hover { background: var(--primary-active); }
+</style>

@@ -1,0 +1,17 @@
+---
+date: 2026-07-08
+category: 其他
+status: 报道争议
+title_zh: "2026世界杯阿根廷对埃及：哈桑“X手势”与赛后梅西交流引发次生争议"
+title_en: "2026 World Cup Argentina v Egypt: Hassan's 'X' gesture and post-match exchange with Messi trigger a secondary controversy"
+summary_zh: "据报道，在阿根廷与埃及的争议比赛之后，埃及主帅霍萨姆·哈桑（Hossam Hassan）做出FIFA反种族歧视“X”手势并在赛后与梅西发生交流，迅速成为媒体讨论的次生争议。一部分报道将该动作解读为对比赛中遭遇的不公、侮辱或更广泛对待方式的抗议；也有报道指出，这一手势与哈桑在本届世界杯期间的政治表达、反歧视姿态和赛后情绪交织在一起，外界对其确切指向并无一致结论。就已检索到的公开报道而言，可以确认的是：该动作与赛后互动被广泛报道并引发解释分歧，但尚不足以据此写成单一、已被最终认证的官方定性。"
+summary_en: "After Argentina's controversial match against Egypt, Egypt coach Hossam Hassan was widely reported to have made FIFA's anti-racism 'X' gesture and then exchanged words with Messi, creating a secondary media controversy. Some outlets interpreted the gesture as a protest against unfair treatment, insults or broader conduct around the match; others noted that it was entangled with Hassan's political messaging, anti-discrimination symbolism and post-match emotions during this World Cup, leaving no single agreed public interpretation. Based on the reporting reviewed, what can be stated with confidence is that the gesture and the post-match interaction were widely reported and disputed in meaning, but they do not amount to a single settled official conclusion."
+tags: [2026世界杯, Argentina, Egypt, Messi, Hossam Hassan, X手势, 次生争议]
+sources:
+  - { label: "Yahoo Sports（Google News聚合页）- Egypt coach Hossam Hassan booked after making anti-racism gesture in World Cup defeat to Argentina", url: "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQcll1SGQydmVMN3ZkQnM1aW5VNV9USjNfRVFXdmlhUTBOUlhCTzVudkVZRm5xTGw1WGkyVExDUTZ0UGc1ZTZkMXhKSXA4VElLY1QzZ01KWUU2dlIxaXN1OUhMaGk1c2txM3ptUDZ6WlNya1N5QUdYTlFmcGwtblN0S3hhTmtXS05t?oc=5", type: 媒体 }
+  - { label: "The New Arab（Google News聚合页）- Why Egypt coach Hossam Hassan used FIFA's anti-racism gesture against Argentina", url: "https://news.google.com/rss/articles/CBMikwFBVV95cUxPNjF6NlZQcEU3R3hLa21Zdk5NOEM0WW1YZEJKM2M2cjZYVVhTSDdZTzdCUnE3ODAtLTRiTTRXdVAzUWRpV2ZnSWQxMm5jdXpKUUItZWNQM1ZBT3REa0IycldzWDlEaE4tMUg2ek13TGtsZnFERWRhTWE2ZGhwWmRUc0NtbzFNbVJWTGVWUTh6cnZrMHM?oc=5", type: 媒体 }
+  - { label: "Hindustan Times（Google News聚合页）- Lionel Messi exchange under scanner after Egypt coach's anti-racism gesture in Argentina's controversial World Cup win", url: "https://news.google.com/rss/articles/CBMikgJBVV95cUxQaERtSldlNER1RmttVUM2UmhiWU9QamRSckpZOWFHdzkxX2tjTUNBSk9TbXJfTlM2VkExYWplaFRiaHdna2p0Ry10YUJtWXpwLWQ3NURtMVVRN1E2OERUcGduNGdwQ0pmZWZtbE00OFBLaUVpVEF5WlFTMXoybzFpX1BXeDNDNlhzU3dfMzV6OTVzSGU5MDNzWGhFd3Q2T0JabmxHcXpwbmhRbGR6dGhDdVlnMzZLYUZZOXdfRV9MVnJudXM1alpkSk1EbjhFNlFmOVpBblMyVDJVdGlFamtVam81QkYyejVVWHVjOS03UnlETVlDWDNIZWxRX2JKbjlxUlZ3aWh0NWQ2cEFmVHo2R0V30gGXAkFVX3lxTE5Qbzk5YUY3SUgzWDRDWlVOVWRaV3hxRkdDR0JPWFNKc1BRT0wxLWw2ZVZyT2dSbWFFVFBpc3ljTFZKWnk3SGlULWNPQVhGenlQa1ZoeWtxeXNNVjEtVkdTX09CLXdZMDd5RFROYzB4UkdSa0dTaUNDZ3Bxc0pqcHlOeXVhb0FneWNnY3dPWVVROVlTbVJKNjBoMGdYMFJiTGE5ZFg3M3F4elFOSGszWENrbnFJZFdRclRIWHkwZ1B3bjJXcVI1XzgzU1BxTnlyNjF4Qmp0NjM4THYzSHpnSldqSXpkYm9tRHFPcjQ1dUstdXJwVE5rYk9QUnBISGctdlIyVEdnNi1RMzQzNGZCbEVFMmRialkzOA?oc=5", type: 媒体 }
+  - { label: "BBC（Google News聚合页）- World Cup 2026: Egypt fume at 'injustice' and make Messi favouritism claims after exit", url: "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8tdzd2YVY1SkFpc29qWFlzanJfUGNjS1F0eUVEMkpraGpmSzI1b3ExVWRXR2F4ZzBRbXQ5U0t0VmRYUjU0ZnBtOEZlSExKYUVGUFJUcmhqeUhDdzJtZHoyeWQzcVRfeUU?oc=5", type: 媒体 }
+---
+
+> 本条目记录的是赛后手势、互动与媒体解释分歧，不代表本站认定该动作已被官方明确解释为某一单一指控或结论。

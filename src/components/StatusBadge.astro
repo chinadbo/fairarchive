@@ -1,0 +1,20 @@
+---
+interface Props { status: string; }
+const { status } = Astro.props;
+const map: Record<string, { cls: string; label: string }> = {
+  '报道争议': { cls: 'b-reported', label: '报道争议' },
+  '已被质疑': { cls: 'b-questioned', label: '已被质疑' },
+  '官方裁定': { cls: 'b-ruled', label: '官方裁定' },
+};
+const s = map[status] ?? map['报道争议'];
+---
+<span class:list={['badge', s.cls]}>{s.label}</span>
+<style>
+.badge {
+  display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+  padding: 4px 12px; border-radius: var(--radius-pill); line-height: 1.4;
+}
+.b-reported { background: var(--surface-card); color: var(--ink); }
+.b-questioned { background: var(--warning); color: var(--on-signal); }
+.b-ruled { background: var(--success); color: var(--on-signal); }
+</style>

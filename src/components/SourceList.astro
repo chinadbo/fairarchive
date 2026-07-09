@@ -1,0 +1,28 @@
+---
+interface Source { label: string; url: string; type?: string; }
+interface Props { sources?: Source[]; lang: 'zh' | 'en'; }
+const { sources = [], lang } = Astro.props;
+const labels = lang === 'zh'
+  ? { media: '媒体', official: '官方', video: '视频', sources: '来源' }
+  : { media: 'Media', official: 'Official', video: 'Video', sources: 'Sources' };
+---
+{sources.length > 0 && (
+  <section class="sources">
+    <h2 class="sources-h">{labels.sources}</h2>
+    <ul>
+      {sources.map((s) => (
+        <li>
+          {s.type && <span class="stype">{s.type === '媒体' ? labels.media : s.type === '官方' ? labels.official : s.type === '视频' ? labels.video : ''}</span>}
+          <a href={s.url} target="_blank" rel="noopener noreferrer" class="external-link">{s.label}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+<style>
+.sources { background: var(--surface-soft); border-radius: var(--radius-lg); padding: var(--space-xl); margin: var(--space-lg) 0; }
+.sources-h { font-size: 18px; margin: 0 0 var(--space-sm); }
+.sources ul { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-xs); }
+.sources li a { min-height: 44px; display: inline-flex; align-items: center; padding: var(--space-xs) 0; }
+.stype { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: var(--space-sm); }
+</style>

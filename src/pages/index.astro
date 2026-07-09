@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Timeline from '../components/Timeline.astro';
+import FilterBar from '../components/FilterBar.astro';
+import { getAllEvents } from '../content';
+const events = await getAllEvents();
+---
+<Base title="公平档案" lang="zh">
+  <section style="max-width:1200px;margin:0 auto;padding:48px 32px 96px;">
+    <h1>公平档案</h1>
+    <FilterBar events={events} lang="zh" />
+    <Timeline events={events} lang="zh" />
+  </section>
+</Base>

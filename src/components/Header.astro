@@ -1,0 +1,35 @@
+---
+import LanguageToggle from './LanguageToggle.astro';
+import type { Lang } from '../lib/i18n';
+import { localizedHref } from '../lib/paths';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = lang === 'zh' ? { name: '公平档案', submit: '提交线索' } : { name: 'Fairness Archive', submit: 'Submit' };
+---
+<header class="site-header">
+  <a href={localizedHref(lang === 'zh' ? '/' : '/en/')} class="wordmark">{t.name}</a>
+  <div class="actions">
+    <LanguageToggle current={lang} />
+    <a href={localizedHref(lang === 'zh' ? '/submit' : '/en/submit')} class="btn-primary">{t.submit}</a>
+  </div>
+</header>
+<style>
+.site-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  max-width: 1200px; margin: 0 auto;
+  border-bottom: 1px solid var(--hairline);
+}
+.wordmark { font-family: var(--font-display); font-size: 24px; color: var(--ink); text-decoration: none; }
+.actions { display: flex; align-items: center; gap: var(--space-md); }
+.btn-primary {
+  background: var(--primary); color: var(--on-primary); text-decoration: none;
+  padding: 12px 20px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500;
+  min-height: 44px; display: inline-flex; align-items: center;
+}
+.btn-primary:hover { background: var(--primary-active); }
+@media (max-width: 768px) {
+  .site-header { padding: var(--space-md); }
+  .wordmark { font-size: 20px; }
+}
+</style>
