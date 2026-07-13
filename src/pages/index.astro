@@ -5,10 +5,10 @@ import FilterBar from '../components/FilterBar.astro';
 import { getAllEvents } from '../content';
 const events = await getAllEvents();
 ---
-<Base title="公平档案" lang="zh">
+<Base title="Fairness Archive" lang="en">
   <section style="max-width:1200px;margin:0 auto;padding:48px 32px 96px;">
-    <h1>公平档案</h1>
-    <FilterBar events={events} lang="zh" />
-    <Timeline events={events} lang="zh" />
+    <h1>Fairness Archive</h1>
+    <FilterBar events={events} lang="en" />
+    <Timeline events={events} lang="en" />
   </section>
 </Base>

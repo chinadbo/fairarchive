@@ -8,15 +8,10 @@ export default defineConfig({
   site: 'https://chinadbo.github.io',
   base: '/fairarchive',
   i18n: {
-    defaultLocale: 'zh',
-    locales: ['zh', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
     routing: {
       prefixDefaultLocale: false,
-      // Astro 7 forbids redirectToDefaultLocale:true when prefixDefaultLocale
-      // is false (would cause infinite redirect loops). Set to false — the
-      // default locale (zh) is already served at root, so there is nothing to
-      // redirect. Brief specified true; changed to false to pass config
-      // validation. See task-1-report.md > Concerns.
       redirectToDefaultLocale: false,
     },
   },

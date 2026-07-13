@@ -6,7 +6,7 @@
 //   base set -> '/fairarchive/'
 const BASE = import.meta.env.BASE_URL as string;
 
-// Prefix a site-relative path (e.g. '/about', '/en/', '/event/xyz') with the
+// Prefix a site-relative path (e.g. '/about', '/zh/', '/event/xyz') with the
 // configured base so the link resolves under a project Pages sub-path.
 export function localizedHref(path: string): string {
   if (path === '/') return BASE; // BASE already carries a trailing slash
@@ -14,7 +14,7 @@ export function localizedHref(path: string): string {
 }
 
 // Strip the base prefix from a full request pathname so language-switch logic
-// can operate on the site-relative path (e.g. '/en/about') regardless of base.
+// can operate on the site-relative path (e.g. '/zh/about') regardless of base.
 export function stripBase(pathname: string): string {
   if (BASE !== '/' && pathname.startsWith(BASE)) {
     const rest = pathname.slice(BASE.length);

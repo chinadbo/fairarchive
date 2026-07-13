@@ -15,10 +15,9 @@ export type NormalizedEvent = {
   category: string;
   status: string;
   tags: string[];
-  title_zh: string;
-  title_en: string;
-  summary_zh: string;
-  summary_en: string;
+  title: string;
+  summary: string;
+  searchText: string;
 };
 
 export function matchesFilters(e: NormalizedEvent, opts: FilterOptions): boolean {
@@ -28,7 +27,7 @@ export function matchesFilters(e: NormalizedEvent, opts: FilterOptions): boolean
   if (tag && !e.tags.includes(tag)) return false;
   if (q && q.trim()) {
     const needle = q.trim().toLowerCase();
-    const hay = [e.title_zh, e.title_en, e.summary_zh, e.summary_en].join(' ').toLowerCase();
+    const hay = [e.title, e.summary, e.searchText].join(' ').toLowerCase();
     if (!hay.includes(needle)) return false;
   }
   return true;
@@ -41,10 +40,15 @@ export function toNormalized(entry: CollectionEntry<'events'>): NormalizedEvent 
     category: entry.data.category,
     status: entry.data.status,
     tags: entry.data.tags,
-    title_zh: entry.data.title_zh,
-    title_en: entry.data.title_en,
-    summary_zh: entry.data.summary_zh,
-    summary_en: entry.data.summary_en,
+    title: entry.data.title_en,
+    summary: entry.data.summary_en,
+    searchText: [
+      entry.data.title_zh,
+      entry.data.title_en,
+      entry.data.summary_zh,
+      entry.data.summary_en,
+      ...entry.data.tags,
+    ].join(' '),
   };
 }
 

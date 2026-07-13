@@ -7,10 +7,10 @@ const { lang } = Astro.props;
 const t = lang === 'zh' ? { name: '公平档案', submit: '提交线索' } : { name: 'Fairness Archive', submit: 'Submit' };
 ---
 <header class="site-header">
-  <a href={localizedHref(lang === 'zh' ? '/' : '/en/')} class="wordmark">{t.name}</a>
+  <a href={localizedHref(lang === 'zh' ? '/zh/' : '/')} class="wordmark">{t.name}</a>
   <div class="actions">
     <LanguageToggle current={lang} />
-    <a href={localizedHref(lang === 'zh' ? '/submit' : '/en/submit')} class="btn-primary">{t.submit}</a>
+    <a href={localizedHref(lang === 'zh' ? '/zh/submit' : '/submit')} class="btn-primary">{t.submit}</a>
   </div>
 </header>
 <style>

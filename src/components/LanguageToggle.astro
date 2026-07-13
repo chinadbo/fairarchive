@@ -7,17 +7,17 @@ const { current } = Astro.props;
 // independent of the deployment sub-path, then re-prefix the base for the href.
 const path = stripBase(Astro.url.pathname);
 let target: string;
-if (current === 'zh') {
-  target = path === '/' ? '/en/' : `/en${path}`;
+if (current === 'en') {
+  target = path === '/' ? '/zh/' : `/zh${path}`;
 } else {
-  target = path.replace(/^\/en(?=\/|$)/, '') || '/';
+  target = path.replace(/^\/zh(?=\/|$)/, '') || '/';
 }
 const href = localizedHref(target);
 ---
-<nav class="lang-toggle" aria-label="语言切换">
+<nav class="lang-toggle" aria-label={current === 'zh' ? '语言切换' : 'Language switch'}>
   {current === 'zh'
-    ? <span class="lang-link active" aria-current="true">中</span>
-    : <a href={href} class="lang-link">中</a>}
+    ? <span class="lang-link active" aria-current="true">ZH</span>
+    : <a href={href} class="lang-link">ZH</a>}
   <span aria-hidden="true">/</span>
   {current === 'en'
     ? <span class="lang-link active" aria-current="true">EN</span>

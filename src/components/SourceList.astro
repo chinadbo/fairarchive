@@ -5,6 +5,32 @@ const { sources = [], lang } = Astro.props;
 const labels = lang === 'zh'
   ? { media: '媒体', official: '官方', video: '视频', sources: '来源' }
   : { media: 'Media', official: 'Official', video: 'Video', sources: 'Sources' };
+
+function localizeSourceLabel(label: string, lang: 'zh' | 'en') {
+  if (lang === 'zh') return label;
+  return label
+    .replace(/（英文）/g, '')
+    .replace(/（官方）/g, '(Official)')
+    .replace(/（Google News聚合页）/g, '(Google News Aggregation)')
+    .replace(/（Google News 聚合页）/g, '(Google News Aggregation)')
+    .replace(/官方赛事报道/g, 'Official Match Report')
+    .replace(/官方比赛中心/g, 'Official Match Centre')
+    .replace(/官方比赛报告/g, 'Official Match Report')
+    .replace(/比赛报告/g, 'Match Report')
+    .replace(/比赛报告（官方）/g, 'Match Report (Official)')
+    .replace(/俱乐部官方声明/g, 'Club Statement')
+    .replace(/俱乐部官方公告/g, 'Club Announcement')
+    .replace(/俱乐部官方/g, 'Club Official')
+    .replace(/官方公告/g, 'Official Announcement')
+    .replace(/官方/g, 'Official')
+    .replace(/媒体/g, 'Media')
+    .replace(/视频/g, 'Video')
+    .replace(/谷歌新闻聚合页/g, 'Google News Aggregation')
+    .replace(/Google News聚合页/g, 'Google News Aggregation')
+    .replace(/路透社/g, 'Reuters')
+    .replace(/现场文字直播/g, 'Live Blog')
+    .replace(/路透/g, 'Reuters');
+}
 ---
 {sources.length > 0 && (
   <section class="sources">
@@ -13,7 +39,7 @@ const labels = lang === 'zh'
       {sources.map((s) => (
         <li>
           {s.type && <span class="stype">{s.type === '媒体' ? labels.media : s.type === '官方' ? labels.official : s.type === '视频' ? labels.video : ''}</span>}
-          <a href={s.url} target="_blank" rel="noopener noreferrer" class="external-link">{s.label}</a>
+          <a href={s.url} target="_blank" rel="noopener noreferrer" class="external-link">{localizeSourceLabel(s.label, lang)}</a>
         </li>
       ))}
     </ul>

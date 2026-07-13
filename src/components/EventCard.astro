@@ -11,17 +11,26 @@ const d = event.data.date;
 const dateStr = lang === 'zh'
   ? `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
   : d.toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' });
-const href = localizedHref(lang === 'zh' ? `/event/${event.id}` : `/en/event/${event.id}`);
+const href = localizedHref(lang === 'zh' ? `/zh/event/${event.id}` : `/event/${event.id}`);
+const categoryLabels: Record<string, { zh: string; en: string }> = {
+  '判罚争议': { zh: '判罚争议', en: 'Disputed Call' },
+  '裁判执法': { zh: '裁判执法', en: 'Refereeing' },
+  'FIFA治理': { zh: 'FIFA治理', en: 'FIFA Governance' },
+  '种族歧视指控': { zh: '种族歧视指控', en: 'Racism Allegation' },
+  '其他': { zh: '其他', en: 'Other' },
+};
+const categoryLabel = categoryLabels[event.data.category]?.[lang] ?? event.data.category;
+const fallbackTitle = lang === 'zh' ? '暂无英文' : 'English translation unavailable';
 ---
 <article class="card" data-event-id={event.id}>
   <div class="card-head">
     <time datetime={d.toISOString()} class="date">{dateStr}</time>
-    <span class="cat">{event.data.category}</span>
-    <StatusBadge status={event.data.status} />
+    <span class="cat">{categoryLabel}</span>
+    <StatusBadge status={event.data.status} lang={lang} />
   </div>
   <h3 class="card-title">
     <a href={href}>{title.text}</a>
-    {title.fallback && <span class="fb" title="暂无英文">⌖</span>}
+    {title.fallback && <span class="fb" title={fallbackTitle}>⌖</span>}
   </h3>
   <p class="card-summary">{summary.text}{summary.fallback ? ' ⌖' : ''}</p>
 </article>

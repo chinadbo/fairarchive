@@ -1,6 +1,7 @@
 ---
-interface Props { title: string; description?: string; }
-const { title, description = '足坛公平正义档案' } = Astro.props;
+import type { Lang } from '../lib/i18n';
+interface Props { title: string; description?: string; lang?: Lang; }
+const { title, lang = 'en', description = lang === 'zh' ? '足坛公平正义档案' : 'A restrained archive of disputed football incidents and governance controversies.' } = Astro.props;
 import '../styles/global.css';
 const faviconHref = `${import.meta.env.BASE_URL}favicon.svg`;
 ---

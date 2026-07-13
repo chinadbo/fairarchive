@@ -23,6 +23,8 @@ export const eventsSchema = z.object({
   title_en: z.string().min(1),
   summary_zh: z.string().min(1),
   summary_en: z.string().min(1),
+  note_zh: z.string().optional(),
+  note_en: z.string().optional(),
   tags: z.array(z.string()).default([]),
   sources: z.array(sourceSchema).min(1),
   response: z

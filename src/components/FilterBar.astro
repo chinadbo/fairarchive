@@ -1,22 +1,202 @@
 ---
 import type { EventEntry } from '../content';
 import type { Lang } from '../lib/i18n';
-import { toNormalized } from '../lib/filters';
+import type { NormalizedEvent } from '../lib/filters';
+import { localizedTitle, localizedSummary } from '../lib/i18n';
 interface Props { events: EventEntry[]; lang: Lang; }
 const { events, lang } = Astro.props;
 const labels = lang === 'zh'
   ? { categories: '分类', status: '状态', search: '搜索事件…', all: '全部', tags: '标签' }
   : { categories: 'Category', status: 'Status', search: 'Search…', all: 'All', tags: 'Tags' };
+const categoryLabels: Record<string, { zh: string; en: string }> = {
+  '判罚争议': { zh: '判罚争议', en: 'Disputed Call' },
+  '裁判执法': { zh: '裁判执法', en: 'Refereeing' },
+  'FIFA治理': { zh: 'FIFA治理', en: 'FIFA Governance' },
+  '种族歧视指控': { zh: '种族歧视指控', en: 'Racism Allegation' },
+  '其他': { zh: '其他', en: 'Other' },
+};
+const statusLabels: Record<string, { zh: string; en: string }> = {
+  '报道争议': { zh: '报道争议', en: 'Reported Dispute' },
+  '已被质疑': { zh: '已被质疑', en: 'Questioned' },
+  '官方裁定': { zh: '官方裁定', en: 'Official Ruling' },
+};
 const allCats = [...new Set(events.map((e) => e.data.category))];
 const allStatus = ['报道争议', '已被质疑', '官方裁定'];
 const allTags = [...new Set(events.flatMap((e) => e.data.tags))].slice(0, 20);
+
+function localizeCategory(category: string, lang: Lang) {
+  return categoryLabels[category]?.[lang] ?? category;
+}
+
+function localizeStatus(status: string, lang: Lang) {
+  return statusLabels[status]?.[lang] ?? status;
+}
+
+function localizeTag(tag: string, lang: Lang) {
+  if (lang === 'zh') return tag;
+  const map: Record<string, string> = {
+    '1986世界杯': '1986 World Cup',
+    '1990世界杯': '1990 World Cup',
+    '1994世界杯': '1994 World Cup',
+    '1998世界杯': '1998 World Cup',
+    '2006世界杯': '2006 World Cup',
+    '2010世界杯': '2010 World Cup',
+    '2014世界杯': '2014 World Cup',
+    '2019美洲杯': '2019 Copa América',
+    '2022世界杯': '2022 World Cup',
+    '2024美洲杯': '2024 Copa América',
+    '2025世俱杯': '2025 Club World Cup',
+    '2025世预赛': '2025 World Cup Qualifiers',
+    '2026世界杯': '2026 World Cup',
+    '76票': '76 Votes',
+    '阿根廷': 'Argentina',
+    '阿根廷足协': 'AFA',
+    '阿根廷vs德国': 'Argentina vs Germany',
+    '阿根廷vs英格兰': 'Argentina vs England',
+    '阿根廷vs西德': 'Argentina vs West Germany',
+    '巴西阿根廷': 'Brazil vs Argentina',
+    '梅西': 'Messi',
+    '法国': 'France',
+    '决赛': 'Final',
+    '点球大战': 'Penalty Shootout',
+    '点球': 'Penalty',
+    '点球判罚': 'Penalty Decision',
+    '球迷': 'Fans',
+    '球迷冲突': 'Fan Clash',
+    '巴西': 'Brazil',
+    '安保': 'Security',
+    '延迟开球': 'Delayed Kickoff',
+    '活动混乱': 'Event Chaos',
+    '组织责任': 'Organizer Responsibility',
+    '组织争议': 'Organizer Dispute',
+    '票务争议': 'Ticketing Dispute',
+    '世预赛': 'World Cup Qualifiers',
+    '世界杯预选赛': 'World Cup Qualifiers',
+    '裁判': 'Referee',
+    '裁判执法': 'Refereeing',
+    '裁判冲突': 'Referee Clash',
+    '偏袒质疑': 'Bias Allegations',
+    '舆论热点': 'Media Hotspot',
+    '国际媒体': 'International Media',
+    '种族歧视': 'Racism',
+    '种族歧视指控': 'Racism Allegation',
+    '判罚争议': 'Disputed Call',
+    '争议点球': 'Disputed Penalty',
+    '争议进球': 'Disputed Goal',
+    '犯规争议': 'Foul Controversy',
+    '资格争议': 'Qualification Controversy',
+    '治理': 'Governance',
+    '治理争议': 'Governance Controversy',
+    '治理危机': 'Governance Crisis',
+    '禁赛': 'Suspension',
+    '越位': 'Offside',
+    '姆巴佩': 'Mbappé',
+    '官方回应': 'Official Response',
+    '次生争议': 'Secondary Controversy',
+    '冲突': 'Confrontation',
+    '情绪对峙': 'Tensions',
+    '球员通道': 'Player Tunnel',
+    '暴力指控': 'Violence Allegation',
+    '签表争议': 'Bracket Debate',
+    '晋级路径': 'Path Debate',
+    '财务争议': 'Financial Controversy',
+    '上帝之手': 'Hand of God',
+    '马拉多纳': 'Maradona',
+    '马丁内斯': 'Martínez',
+    '埃米利亚诺·马丁内斯': 'Emiliano Martínez',
+    '迈阿密国际': 'Inter Miami',
+    '解放者杯': 'Libertadores',
+    '博卡青年': 'Boca Juniors',
+    '河床': 'River Plate',
+    '大巴遇袭': 'Bus Attack',
+    '退役': 'Retirement',
+    '连续决赛失利': 'Consecutive Final Defeats',
+    '国际大赛冠军荒': 'Major-Tournament Drought',
+    '选举丑闻': 'Election Scandal',
+    '正常化委员会': 'Normalization Committee',
+    'FIFA正常化': 'FIFA Normalization',
+    '手球': 'Handball',
+    '药检': 'Doping Test',
+    '麻黄碱': 'Ephedrine',
+    '兴奋剂': 'Doping',
+    '贝克汉姆': 'Beckham',
+    '红牌': 'Red Card',
+    '西蒙尼': 'Simeone',
+    '假摔': 'Simulation',
+    '诺伊尔': 'Neuer',
+    '伊瓜因': 'Higuaín',
+    '里佐利': 'Rizzoli',
+    '特维斯': 'Tevez',
+    '罗塞蒂': 'Rosetti',
+    '墨西哥': 'Mexico',
+    '德国': 'Germany',
+    '布雷默': 'Brehme',
+    '科德萨尔': 'Codesal',
+    '荷兰': 'Netherlands',
+    '马特乌·拉奥斯': 'Mateu Lahoz',
+    '克罗地亚': 'Croatia',
+    '沙特': 'Saudi Arabia',
+    '揭幕战': 'Opening Match',
+    '什琴斯尼': 'Szczęsny',
+    '乌拉圭': 'Uruguay',
+    '哥伦比亚': 'Colombia',
+    '看台冲突': 'Stand Clash',
+    'CONMEBOL调查': 'CONMEBOL Investigation',
+    '南美足联': 'CONMEBOL',
+    '腐败指控': 'Corruption Allegation',
+    '智利': 'Chile',
+    '蒂特': 'Tite',
+    '反足球': 'Anti-football',
+    '公平竞赛': 'Fair Play',
+    '助理裁判': 'Assistant Referee',
+    'FIFA纪律': 'FIFA Discipline',
+    'FIFA纪律处罚': 'FIFA Disciplinary Sanction',
+    'FIFA禁赛': 'FIFA Suspension',
+    '上诉': 'Appeal',
+    '抵制': 'Boycott',
+    '赛事组织': 'Tournament Organization',
+    '警方介入': 'Police Intervention',
+    '赛后冲突': 'Post-match Clash',
+    '库弗雷': 'Cufré',
+    '弗林斯': 'Frings',
+    '马德里': 'Madrid',
+    '马齐尼亚克': 'Marciniak',
+    '格隆多纳': 'Grondona',
+    '塔皮亚': 'Tapia',
+    '网络辱骂': 'Online Abuse',
+    '科曼': 'Coman',
+    '夺冠游行': 'Victory Parade',
+    'FIFA治理': 'FIFA Governance',
+    'FIFA调查': 'FIFA Investigation',
+    'FIFA投诉': 'FIFA Complaint',
+    'COVID隔离': 'COVID Quarantine',
+    'X手势': 'X Gesture',
+  };
+  return map[tag] ?? tag;
+}
+
+const normalizedEvents: NormalizedEvent[] = events.map((event) => {
+  const title = localizedTitle(event, lang);
+  const summary = localizedSummary(event, lang);
+  const localizedTags = event.data.tags.map((tag: string) => localizeTag(tag, lang));
+  return {
+    id: event.id,
+    date: event.data.date.toISOString(),
+    category: localizeCategory(event.data.category, lang),
+    status: localizeStatus(event.data.status, lang),
+    tags: localizedTags,
+    title: title.text,
+    summary: summary.text,
+    searchText: `${title.text} ${summary.text} ${localizedTags.join(' ')}`,
+  };
+});
 ---
 <filter-bar data-lang={lang}>
-  <script type="application/json" set:html={JSON.stringify(events.map(toNormalized))} />
+  <script type="application/json" set:html={JSON.stringify(normalizedEvents)} />
   <div class="filter-row">
-    <select id="f-cat" class="sel"><option value="">{labels.all}</option>{allCats.map((c) => <option value={c}>{c}</option>)}</select>
-    <select id="f-status" class="sel"><option value="">{labels.all}</option>{allStatus.map((s) => <option value={s}>{s}</option>)}</select>
-    <select id="f-tag" class="sel"><option value="">{labels.all}</option>{allTags.map((t) => <option value={t}>{t}</option>)}</select>
+    <select id="f-cat" class="sel" aria-label={labels.categories}><option value="">{labels.all}</option>{allCats.map((c) => <option value={localizeCategory(c, lang)}>{localizeCategory(c, lang)}</option>)}</select>
+    <select id="f-status" class="sel" aria-label={labels.status}><option value="">{labels.all}</option>{allStatus.map((s) => <option value={localizeStatus(s, lang)}>{localizeStatus(s, lang)}</option>)}</select>
+    <select id="f-tag" class="sel" aria-label={labels.tags}><option value="">{labels.all}</option>{allTags.map((t) => <option value={localizeTag(t, lang)}>{localizeTag(t, lang)}</option>)}</select>
     <input id="f-q" class="inp" type="search" placeholder={labels.search} />
   </div>
 </filter-bar>

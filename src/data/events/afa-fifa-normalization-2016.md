@@ -13,7 +13,7 @@ sources:
   - { label: "World Soccer Talk — Argentina football chief slams FIFA dismissal", url: "https://worldsoccertalk.com/news/argentina-football-chief-slams-fifa-dismissal-20160625-CMS-178158.html", type: 媒体 }
 ruling:
   verdict_zh: "FIFA理事会局 (Bureau of the FIFA Council)（2016-06-24）：FIFA依据章程第8条第2款为阿根廷足协任命正常化委员会，接管协会事务并组织新一轮选举；2017年3月完成主席选举，塔皮亚当选。"
-  verdict_en: "FIFA理事会局 (Bureau of the FIFA Council) (2016-06-24): FIFA appointed a normalization committee to run the AFA and organize fresh elections; a new president (Claudio Tapia) was elected in March 2017."
+  verdict_en: "Bureau of the FIFA Council (2016-06-24): FIFA appointed a normalization committee to run the AFA and organize fresh elections; a new president, Claudio Tapia, was elected in March 2017."
   source: { label: "FIFA — Normalisation committee appointed for the Argentine FA (official)", url: "https://inside.fifa.com/en/media-releases/normalisation-committee-appointed-for-the-argentine-fa-2803547", type: 官方 }
 ---
 

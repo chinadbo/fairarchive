@@ -13,7 +13,7 @@ sources:
   - { label: "Sports Illustrated — Lionel Messi Suspended Three Months After Copa América", url: "https://www.si.com/soccer/2019/08/03/lionel-messi-suspension-corruption-argentina-copa-america", type: 媒体 }
 ruling:
   verdict_zh: "南美足联 (CONMEBOL)（2019-08-02）：对梅西处以三个月国际比赛禁赛及5万美元罚款（针对其在2019美洲杯期间针对裁判与南美足联的言论）。"
-  verdict_en: "南美足联 (CONMEBOL) (2019-08-02): Handed Messi a three-month international match ban and a USD 50,000 fine over his comments about referees and CONMEBOL during the 2019 Copa América."
+  verdict_en: "CONMEBOL (2019-08-02): Handed Messi a three-month international match ban and a USD 50,000 fine over his comments about referees and CONMEBOL during the 2019 Copa América."
   source: { label: "AP News — Messi suspended from Argentina for 3 months for comments", url: "https://apnews.com/messi-suspended-from-argentina-for-3-months-for-comments-37c1f4667dee4e488f50b756e6e98337", type: 媒体 }
 ---
 

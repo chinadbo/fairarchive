@@ -2,19 +2,19 @@
 import Base from '../layouts/Base.astro';
 import { repo } from '../config';
 ---
-<Base title="提交线索 · 公平档案" lang="zh">
+<Base title="Submit a Lead · Fairness Archive" lang="en">
   <section style="max-width:720px;margin:0 auto;padding:48px 32px 96px;">
-    <h1>提交线索</h1>
-    <p>请填写以下信息。提交后将打开一个预填好的 GitHub Issue,经审核后入库。来源链接必填。</p>
+    <h1>Submit a Lead</h1>
+    <p>Fill in the details below. Submitting will open a pre-filled GitHub Issue for review before it enters the archive. A source link is required.</p>
     <form id="submit-form">
-      <label>日期 <input name="date" type="date" required /></label>
-      <label>分类 <select name="category"><option>判罚争议</option><option>裁判执法</option><option>FIFA治理</option><option>种族歧视指控</option><option>其他</option></select></label>
-      <label>状态 <select name="status"><option>报道争议</option><option>已被质疑</option><option>官方裁定</option></select></label>
-      <label>标题(中) <input name="title_zh" required /></label>
-      <label>标题(英) <input name="title_en" /></label>
-      <label>摘要(中) <textarea name="summary_zh" required></textarea></label>
-      <label>来源链接(必填) <input name="source" type="url" required placeholder="https://…" /></label>
-      <button type="submit" class="btn-primary">提交 Issue</button>
+      <label>Date <input name="date" type="date" required /></label>
+      <label>Category <select name="category"><option>Disputed call</option><option>Refereeing</option><option>FIFA governance</option><option>Racism allegation</option><option>Other</option></select></label>
+      <label>Status <select name="status"><option>Reported dispute</option><option>Called into question</option><option>Official ruling</option></select></label>
+      <label>Title (English) <input name="title_en" required /></label>
+      <label>Title (Chinese) <input name="title_zh" /></label>
+      <label>Summary (English) <textarea name="summary_en" required></textarea></label>
+      <label>Source URL (required) <input name="source" type="url" required placeholder="https://…" /></label>
+      <button type="submit" class="btn-primary">Open Issue</button>
     </form>
   </section>
 </Base>
@@ -23,12 +23,12 @@ import { repo } from '../config';
   f.addEventListener('submit', (e) => {
     e.preventDefault();
     const d = new FormData(f);
-    const title = `[线索] ${d.get('title_zh') || d.get('title_en')}`;
+    const title = `[Lead] ${d.get('title_en') || d.get('title_zh')}`;
     const body = [
-      `日期: ${d.get('date')}`, `分类: ${d.get('category')}`, `状态: ${d.get('status')}`,
-      `标题(中): ${d.get('title_zh')}`, `标题(英): ${d.get('title_en')}`,
-      `摘要(中): ${d.get('summary_zh')}`, `来源: ${d.get('source')}`,
-      '', '--- 请审核来源,必要时补充当事方回应与后续裁定。', '',
+      `Date: ${d.get('date')}`, `Category: ${d.get('category')}`, `Status: ${d.get('status')}`,
+      `Title (en): ${d.get('title_en')}`, `Title (zh): ${d.get('title_zh')}`,
+      `Summary (en): ${d.get('summary_en')}`, `Source: ${d.get('source')}`,
+      '', '--- Please verify the source; add the accused party response and any subsequent ruling where applicable.', '',
     ].join('\n');
     window.open(`https://github.com/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`, '_blank');
   });
