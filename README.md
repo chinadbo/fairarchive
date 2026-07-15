@@ -44,6 +44,12 @@ More localized README files can be added later, for example `README.ja.md` or `R
 
 ---
 
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) to add events, submit leads, or edit entries.
+
+---
+
 ## Tech Stack
 
 - [Astro](https://astro.build/)

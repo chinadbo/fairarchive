@@ -48,6 +48,12 @@
 
 ---
 
+## 参与贡献
+
+参与贡献请见 [CONTRIBUTING.zh-CN.md](./CONTRIBUTING.zh-CN.md)。
+
+---
+
 ## 技术栈
 
 - [Astro](https://astro.build/)
