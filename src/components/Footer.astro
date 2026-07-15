@@ -1,16 +1,25 @@
 ---
 import type { Lang } from '../lib/i18n';
 import { localizedHref } from '../lib/paths';
+import { repo } from '../config';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = lang === 'zh'
-  ? { about: '关于本站', method: '本站记录公开报道的争议事件,区分争议与已证实,非定罪材料。' }
-  : { about: 'About', method: 'This site documents publicly reported disputes, distinguishing allegations from findings. Not a conviction record.' };
+  ? { about: '关于本站', method: '本站记录公开报道的争议事件,区分争议与已证实,非定罪材料。', contributing: '贡献指南' }
+  : { about: 'About', method: 'This site documents publicly reported disputes, distinguishing allegations from findings. Not a conviction record.', contributing: 'Contributing' };
+const githubUrl = `https://github.com/${repo}`;
+const contributingUrl = `https://github.com/${repo}/blob/HEAD/${lang === 'zh' ? 'CONTRIBUTING.zh-CN.md' : 'CONTRIBUTING.md'}`;
 ---
 <footer class="site-footer">
   <div class="footer-inner">
     <p class="muted">{t.method}</p>
-    <a href={localizedHref(lang === 'zh' ? '/zh/about' : '/about')}>{t.about}</a>
+    <nav class="footer-links" aria-label={lang === 'zh' ? '页脚链接' : 'Footer links'}>
+      <a href={localizedHref(lang === 'zh' ? '/zh/about' : '/about')}>{t.about}</a>
+      <span aria-hidden="true">·</span>
+      <a href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <span aria-hidden="true">·</span>
+      <a href={contributingUrl} target="_blank" rel="noopener noreferrer">{t.contributing}</a>
+    </nav>
   </div>
 </footer>
 <style>
@@ -18,4 +27,6 @@ const t = lang === 'zh'
 .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; gap: var(--space-lg); flex-wrap: wrap; }
 .muted { color: var(--on-dark-soft); max-width: 560px; line-height: 1.55; }
 .footer-inner a { color: var(--on-dark); }
+.footer-links { display: inline-flex; align-items: center; gap: var(--space-xs); flex-wrap: wrap; }
+.footer-links span { color: var(--on-dark-soft); }
 </style>
